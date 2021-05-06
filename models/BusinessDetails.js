@@ -22,3 +22,4 @@ class BusinessDetails extends Model {
 }
 
 module.exports = BusinessDetails;
+

@@ -48,6 +48,7 @@ exports.token = async (req, res) => {
     if (existingToken.length < 1) {
         return res.sendStatus(403);
     }
+    
     jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET, (error, user) => {
         if (error) {
             return res.sendStatus(403);

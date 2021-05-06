@@ -33,8 +33,8 @@ exports.readBusiness = async (req, res) => {
 };
 
 exports.createBusiness = async (req, res) => {
-    const { title, description, category, address, city, country, postCode, phoneNumber, webSite, email, reviewCount, averageStars, 
-        acceptsCreditCard, acceptsReservations, delivers, offersTakeout, freeWifi, outDoorSeating, driveThrough, priceRange } = req.body;
+    const { title, description, category, address, city, country, postCode, phoneNumber, webSite, email, 
+    acceptsCreditCard, acceptsReservations, delivers, offersTakeout, freeWifi, outDoorSeating, driveThrough, priceRange } = req.body;
 
     const businessInfo = {
         title,
@@ -47,10 +47,8 @@ exports.createBusiness = async (req, res) => {
         phoneNumber,
         webSite,
         email,
-        reviewCount,
         detailsID: null,
         userID: req.user.id,
-        averageStars
     };
 
     const detailsInfo = {

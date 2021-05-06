@@ -4,7 +4,7 @@ const bcrypt = require('bcrypt');
 const saltRounds = 12;
 
 exports.createUser = async (req, res) => {
-    const { firstName, lastName, profilePicture, password, email, country, city, numberOfReviews, numberOfLikes, numberOfPhotos } = req.body;
+    const { firstName, lastName, profilePicture, password, email, country, city } = req.body;
     try {
 
         const existing = await User.query().select().where('email', email).limit(1);
@@ -22,10 +22,7 @@ exports.createUser = async (req, res) => {
             password: hashedPassword, 
             email, 
             country, 
-            city, 
-            numberOfReviews, 
-            numberOfLikes, 
-            numberOfPhotos
+            city
         });
 
         return res.sendStatus(200);
