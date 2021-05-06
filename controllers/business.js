@@ -71,12 +71,6 @@ exports.createBusiness = async (req, res) => {
         if (exists.length > 0) {
             return res.send({response: "Business already exists."});
         }
-
-        async function insertBusinessAndDetails(businessInfo, detailsInfo, db) {
-            const businessDetails = await BusinessDetails.query(db).insert(detailsInfo);
-            businessInfo.detailsID = businessDetails.id;
-            return businessDetails.$relatedQuery('business', db).insert(businessInfo);
-        }
         
         await insertBusinessAndDetails(businessInfo, detailsInfo, trx);
         await trx.commit();
@@ -239,3 +233,9 @@ exports.updateWebsiteInBusiness = async (req, res) => {
         return res.sendStatus(500);
     }
 };
+
+async function insertBusinessAndDetails(businessInfo, detailsInfo, db) {
+    const businessDetails = await BusinessDetails.query(db).insert(detailsInfo);
+    businessInfo.detailsID = businessDetails.id;
+    return businessDetails.$relatedQuery('business', db).insert(businessInfo);
+}

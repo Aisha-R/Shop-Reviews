@@ -13,7 +13,8 @@ const connection = mysql.createConnection({
     host: 'localhost',
     user: credentials.user,
     password: credentials.password,
-    database: credentials.database
+    database: credentials.database,
+    multipleStatements: false
 });
 
 connection.connect( (error) => {
