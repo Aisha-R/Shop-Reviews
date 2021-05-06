@@ -1,14 +1,12 @@
-const credentials = require('./config/mySQLCredentials');
-
 module.exports = {
 
     development: {
 
         client: 'mysql',
         connection: {
-            user: credentials.user,
-            password: credentials.password,
-            database: credentials.database
+            user: process.env.USER,
+            password: process.env.PASSWORD,
+            database: process.env.DATABASE
         }
     }
 

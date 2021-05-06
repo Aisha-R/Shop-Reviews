@@ -7,13 +7,12 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-const credentials = require('./config/mySQLCredentials.js')
 
 const connection = mysql.createConnection({
-    host: 'localhost',
-    user: credentials.user,
-    password: credentials.password,
-    database: credentials.database,
+    host: process.env.HOST,
+    user: process.env.USER,
+    password: process.env.PASSWORD,
+    database: process.env.DATABASE,
     multipleStatements: false
 });
 
