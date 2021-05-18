@@ -4,13 +4,6 @@ const BusinessController = require('../controllers/business.js');
 
 const checkAuthMiddleware = require('../middleware/check-auth.js');
 
-/**
- * @swagger
- * tags:
- *  name: Business
- *  description: Businesses management
- */
-
 router.get('/readallbusinesses', BusinessController.readAllBusinesses);
 
 router.get('/readbusiness/:id', BusinessController.readBusiness);

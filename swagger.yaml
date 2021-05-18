@@ -4,6 +4,305 @@ info:
   description: Node.js + MySQL - API documentation
   version: 1.0.0
 
+tags:
+  - name: Auth
+    description: User authentication
+
+  - name: Users
+    description: Manage users
+
+  - name: Businesses
+    description: Manage businesses
+
+  - name: Reviews
+    description: Manage reviews
+
 servers:
   - url: http://localhost:3000
     description: Local development server
+
+# *** Auth ***
+
+paths:
+  /login:
+    post:
+      tags:
+       - Auth 
+      description: Login as a user
+      operationId: authenticate
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:  
+                  type: string
+                  example: "john@gmail.com"
+                password:
+                  type: string
+                  example: "pass123"
+              required:
+                - email
+                - password
+      responses:
+        "200":
+          description: User is authenticated. Returns a JWT access token and a refresh token
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  acessToken:
+                    type: string
+                    example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNodWNrQGdtYWlsLmNvbSIsImlkIjoyMywiaWF0IjoxNjIxMzY1NTg5LCJleHAiOjE2MjEzNjYxODl9.3-Fq479Ovu0emvDeqy6YJiABr5JsPzjhpZekIeupc-4"
+                  refreshToken:
+                    type: string
+                    example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNodWNrQGdtYWlsLmNvbSIsImlkIjoyMywiaWF0IjoxNjIxMzY1NTg5fQ.a9Fouq_9uoG-XfsdivTufzh1segoWqZMONlJT8mIuMY"
+        "401":
+          description: User is unauthorized
+        "400":
+          description: The email or password is incorrect
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Email or password is incorrect"
+  /token:
+    post:
+      tags:
+        - Auth
+      description: Create a new access token
+      operationId: refreshToken
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                token:  
+                  type: string
+                  example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNodWNrQGdtYWlsLmNvbSIsImlkIjoyMywiaWF0IjoxNjIxMzY5MjA1fQ.J38ddVRn8G7LIqeShsqeJOQpyFadCBH-3BlBp3RXrNs"
+      responses:
+        "201":
+          description: Returns a new access token
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  accessToken:
+                    type: string
+                    example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNodWNrQGdtYWlsLmNvbSIsImlkIjoyMywiaWF0IjoxNjIxMzcwNzAyLCJleHAiOjE2MjEzNzEzMDJ9.9qXuZ1vucbCKgnAwMbg5gJaMlzUZrds-zU3xGtTrVlg"
+        "401":
+          description: User is unauthorized
+        "403":
+          description:  Forbidden
+
+  /logout:
+    post:
+      tags:
+        - Auth
+      description: User logs out
+
+# *** Users ***
+
+  /createuser:
+    post:
+      tags:
+        - Users
+      description: Create a new user (check schema for required fields)
+      operationId: create
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                firstName:
+                  type: string
+                  example: "John"
+                lastName:
+                  type: string
+                  example: "Doe"
+                profilePicture:
+                  type: string
+                  example: "http://dummyimage.com/180x103.png/5fa2dd/ffffff"
+                email:
+                  type: string
+                  example: "john@gmail.com"
+                password:
+                  type: string
+                  example: "pass123"
+                country:
+                  type: string
+                  example: "Denmark"
+                city:
+                  type: string
+                  example: "Copenhagen"
+              required:
+                - firstName
+                - lastName
+                - email
+                - password
+      responses: 
+        "201":
+          description: "A user was created"
+          content:
+            schema:
+              type: object
+              properties:
+                message:
+                  type: string
+                  example: "Registration successful"
+  /readallusers:
+    get:
+      tags:
+        - Users
+      description: Get all users
+  
+  /readuser:
+    get:
+      tags:
+       - Users
+      description: Get a user
+
+  /deleteuser:
+    get:
+      tags:
+        - Users
+      description: Delete a user
+
+  /updateprofilepictureinuser:
+    patch:
+      tags:
+        - Users
+      description: Update the user's profile picture
+  
+  /updatecountryinuser:
+    patch:
+      tags:
+        - Users
+      description: Updates the user's country
+  
+  /updatecityinuser:
+    patch:
+      tags:
+        - Users
+      description: Updates the user's "Email 'jason@example.com' is already registered"
+
+# *** Businesses ***
+
+  /createbusiness:
+    post:
+      tags:
+        - Businesses
+      description: Create a new user
+
+  /readallbusinesses:
+    get:
+      tags:
+        - Businesses
+      description: Get all users
+  
+  /readbusiness/:id:
+    get:
+      tags:
+       - Businesses
+      description: Get a user
+
+  /deletebusiness:
+    get:
+      tags:
+        - Businesses
+      description: Delete a user
+
+  /updatemailinbusiness:
+    patch:
+      tags:
+        - Businesses
+      description: Update the user's profile picture
+  
+  /updatephonenumberinbusiness:
+    patch:
+      tags:
+        - Businesses
+      description: Updates the user's country
+  
+  /updatewebsiteinbusiness:
+    patch:
+      tags:
+        - Businesses
+      description: Updates the user's "Email 'jason@example.com' is already registered"
+
+# *** Reviews ***
+
+  /createreview:
+    post:
+      tags:
+        - Reviews
+      description: Create a new user
+
+  /readallreviews:
+    get:
+      tags:
+        - Reviews
+      description: Get all users
+  
+  /readreviewsbybusiness:
+    get:
+      tags:
+       - Reviews
+      description: Get a user
+
+  /readreviewsbystars:
+    get:
+      tags:
+       - Reviews
+      description: Get a user
+  
+  /readreviewsbyuser:
+    get:
+      tags:
+       - Reviews
+      description: Get a user
+  
+  /readreviewsbylanguage:
+    get:
+      tags:
+       - Reviews
+      description: Get a user
+  
+  /deletereview:
+    get:
+      tags:
+        - Reviews
+      description: Delete a user
+
+  /updatetextinreview:
+    patch:
+      tags:
+        - Reviews
+      description: Update the user's profile picture
+  
+  /updatestarsinreview:
+    patch:
+      tags:
+        - Reviews
+      description: Updates the user's country
+  
+  /updatelikeinreview:
+    patch:
+      tags:
+        - Reviews
+      description: Updates the user's "Email 'jason@example.com' is already registered"
+
+  
+  
+

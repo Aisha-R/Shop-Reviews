@@ -60,12 +60,20 @@ exports.token = async (req, res) => {
 };
 
 exports.logout = async (req, res) => {
-    await RefreshToken.query().delete().where('refreshToken', req.body.token);
-    
+
+    console.log(req.body.token);
+    try {
+
+        await RefreshToken.query().delete().where('refreshToken', req.body.token);
+
+    } catch (error) {
+
+        return res.sendStatus(500);
+    }
+  
     return res.sendStatus(204);
 };
 
 const generateAccessToken = (user) => {
-    // for testing purposes i changed the expiration time
-    return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '120m'});
+    return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '10m'});
 }
