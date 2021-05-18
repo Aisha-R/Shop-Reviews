@@ -4,6 +4,12 @@ const ReviewsController = require('../controllers/reviews.js');
 
 const checkAuthMiddleware = require('../middleware/check-auth.js');
 
+/**
+ * @swagger
+ * tags:
+ *  name: Review
+ *  description: Reviews management
+ */
 
 router.get('/readallreviews', ReviewsController.readAllReviews);
 

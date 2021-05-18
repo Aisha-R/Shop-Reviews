@@ -5,9 +5,11 @@ const saltRounds = 12;
 
 exports.createUser = async (req, res) => {
     const { firstName, lastName, profilePicture, password, email, country, city } = req.body;
+    console.log(firstName);
     try {
-
+        console.log('!!')
         const existing = await User.query().select().where('email', email).limit(1);
+        console.log(existing);
 
         if (existing.length > 0) {
             return res.sendStatus(403);

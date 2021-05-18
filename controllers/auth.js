@@ -66,5 +66,6 @@ exports.logout = async (req, res) => {
 };
 
 const generateAccessToken = (user) => {
-    return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '10m'});
+    // for testing purposes i changed the expiration time
+    return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '120m'});
 }

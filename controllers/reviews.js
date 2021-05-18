@@ -71,8 +71,10 @@ exports.readReviewsByLanguage = async (req, res) => {
 
 exports.createReview = async (req, res) => {
     const { reviewText, stars, reviewDate, likeCount, BusinessID, LanguageID } = req.body;
+    console.log(req.body);
+    console.log(req.user.id);
     try {
-
+        consolelog('!')
         await Review.query().insert({
             reviewText, 
             stars, 
@@ -119,6 +121,7 @@ exports.deleteReview = async (req, res) => {
 exports.updateTextInReview = async (req, res) => {
 
     const { id, reviewText } = req.body;
+    console.log(req.body);
 
     try {
 

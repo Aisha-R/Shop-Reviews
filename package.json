@@ -23,11 +23,13 @@
     "cross-env": "^7.0.3",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "js-yaml": "^4.1.0",
     "jsonwebtoken": "^8.5.1",
     "knex": "^0.95.4",
     "method-override": "^3.0.0",
     "mysql": "^2.18.1",
     "nodemon": "^2.0.7",
-    "objection": "^2.2.15"
+    "objection": "^2.2.15",
+    "swagger-ui-express": "^4.1.6"
   }
 }

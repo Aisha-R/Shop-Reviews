@@ -7,7 +7,6 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-
 const connection = mysql.createConnection({
     host: process.env.HOST,
     user: process.env.USER,
@@ -32,6 +31,9 @@ app.use(reviewsRoute);
 
 const usersRoute = require('./routes/users.js');
 app.use(usersRoute);
+
+// swagger docs route
+app.use('/api-docs', require('./_helper/swagger.js'));
 
 const { Model } = require('objection');
 const KnexLibrary = require('knex');
