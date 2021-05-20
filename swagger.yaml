@@ -22,13 +22,12 @@ servers:
     description: Local development server
 
 # *** Auth ***
-
 paths:
   /login:
     post:
       tags:
        - Auth 
-      description: Login as a user
+      summary: Logs user into the system
       operationId: authenticate
       requestBody:
         required: true
@@ -39,10 +38,10 @@ paths:
               properties:
                 email:  
                   type: string
-                  example: "john@gmail.com"
+                  example: "test@gmail.com"
                 password:
                   type: string
-                  example: "pass123"
+                  example: "1234"
               required:
                 - email
                 - password
@@ -56,10 +55,10 @@ paths:
                 properties:
                   acessToken:
                     type: string
-                    example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNodWNrQGdtYWlsLmNvbSIsImlkIjoyMywiaWF0IjoxNjIxMzY1NTg5LCJleHAiOjE2MjEzNjYxODl9.3-Fq479Ovu0emvDeqy6YJiABr5JsPzjhpZekIeupc-4"
+                    example: "string"
                   refreshToken:
                     type: string
-                    example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNodWNrQGdtYWlsLmNvbSIsImlkIjoyMywiaWF0IjoxNjIxMzY1NTg5fQ.a9Fouq_9uoG-XfsdivTufzh1segoWqZMONlJT8mIuMY"
+                    example: "string"
         "401":
           description: User is unauthorized
         "400":
@@ -76,7 +75,7 @@ paths:
     post:
       tags:
         - Auth
-      description: Create a new access token
+      summary: Create a new access token
       operationId: refreshToken
       requestBody:
         required: true
@@ -89,7 +88,7 @@ paths:
                   type: string
                   example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNodWNrQGdtYWlsLmNvbSIsImlkIjoyMywiaWF0IjoxNjIxMzY5MjA1fQ.J38ddVRn8G7LIqeShsqeJOQpyFadCBH-3BlBp3RXrNs"
       responses:
-        "201":
+        "200":
           description: Returns a new access token
           content:
             application/json:
@@ -108,15 +107,14 @@ paths:
     post:
       tags:
         - Auth
-      description: User logs out
+      summary: Logs out current logged in user session
 
 # *** Users ***
-
   /createuser:
     post:
       tags:
         - Users
-      description: Create a new user (check schema for required fields)
+      summary: Create user
       operationId: create
       requestBody:
         required: true
@@ -165,143 +163,169 @@ paths:
     get:
       tags:
         - Users
-      description: Get all users
-  
+      summary: Get all users
+      security:
+        - bearerAuth: []
+      parameters:
+       -  in: header
+          name: Token
+          schema: 
+            type: string
+            example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNodWNrQGdtYWlsLmNvbSIsImlkIjoyMywiaWF0IjoxNjIxNTA1NTMyLCJleHAiOjE2MjE1MDYxMzJ9.2REuDzee22_1l2AItLg5bkqiiof-MVDn9sv69TmwbiE   
+      reponses:
+        "200":
+          description: Success Response
+          constent:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "OK"
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Invalid token"
   /readuser:
     get:
       tags:
        - Users
-      description: Get a user
+      summary: Get a user
 
   /deleteuser:
     get:
       tags:
         - Users
-      description: Delete a user
+      summary: Delete user
 
   /updateprofilepictureinuser:
     patch:
       tags:
         - Users
-      description: Update the user's profile picture
+      summary: Updates a user's image
   
   /updatecountryinuser:
     patch:
       tags:
         - Users
-      description: Updates the user's country
+      summary: Updates a user's country
   
   /updatecityinuser:
     patch:
       tags:
         - Users
-      description: Updates the user's "Email 'jason@example.com' is already registered"
+      summary: Updates a user's city
 
 # *** Businesses ***
-
   /createbusiness:
     post:
       tags:
         - Businesses
-      description: Create a new user
+      summary: Create a business
 
   /readallbusinesses:
     get:
       tags:
         - Businesses
-      description: Get all users
+      summary: Get all businesses
   
   /readbusiness/:id:
     get:
       tags:
        - Businesses
-      description: Get a user
+      summary: Get a business by ID
 
   /deletebusiness:
     get:
       tags:
         - Businesses
-      description: Delete a user
+      summary: Delete a business
 
   /updatemailinbusiness:
     patch:
       tags:
         - Businesses
-      description: Update the user's profile picture
+      summary: Updates a business email
   
   /updatephonenumberinbusiness:
     patch:
       tags:
         - Businesses
-      description: Updates the user's country
+      summary: Updates a business phone number
   
   /updatewebsiteinbusiness:
     patch:
       tags:
         - Businesses
-      description: Updates the user's "Email 'jason@example.com' is already registered"
+      summary: Updates a business website
 
 # *** Reviews ***
-
   /createreview:
     post:
       tags:
         - Reviews
-      description: Create a new user
+      summary: Create a review
 
   /readallreviews:
     get:
       tags:
         - Reviews
-      description: Get all users
+      summary: Get all reviews
   
   /readreviewsbybusiness:
     get:
       tags:
        - Reviews
-      description: Get a user
+      summary: Get reviews by business
 
   /readreviewsbystars:
     get:
       tags:
        - Reviews
-      description: Get a user
+      summary: Get reviews by stars
   
   /readreviewsbyuser:
     get:
       tags:
        - Reviews
-      description: Get a user
+      summary: Get reviews by user
   
   /readreviewsbylanguage:
     get:
       tags:
        - Reviews
-      description: Get a user
+      summary: Get reviews by language
   
   /deletereview:
     get:
       tags:
         - Reviews
-      description: Delete a user
+      summary: Delete a review
 
   /updatetextinreview:
     patch:
       tags:
         - Reviews
-      description: Update the user's profile picture
+      summary: Updates text in a review
   
   /updatestarsinreview:
     patch:
       tags:
         - Reviews
-      description: Updates the user's country
+      summary: Updates stars in a review
   
   /updatelikeinreview:
     patch:
       tags:
         - Reviews
-      description: Updates the user's "Email 'jason@example.com' is already registered"
+      summary: Updates likes in a review"
 
   
   
