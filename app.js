@@ -33,7 +33,7 @@ const usersRoute = require('./routes/users.js');
 app.use(usersRoute);
 
 // swagger docs route
-app.use('/api-docs', require('./_helper/swagger.js'));
+app.use('/api-docs', require('./config/swagger.js'));
 
 const { Model } = require('objection');
 const KnexLibrary = require('knex');
