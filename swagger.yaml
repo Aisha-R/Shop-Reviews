@@ -35,7 +35,7 @@ paths:
               properties:
                 email:  
                   type: string
-                  example: "pedro@gmail.com"
+                  example: "test@gmail.com"
                 password:
                   type: string
                   example: "12345"
@@ -165,7 +165,7 @@ paths:
                   example: "http://dummyimage.com/180x103.png/5fa2dd/ffffff"
                 email:
                   type: string
-                  example: "john@gmail.com"
+                  example: "test@gmail.com"
                 password:
                   type: string
                   example: "12345"
