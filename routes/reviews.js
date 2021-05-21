@@ -6,17 +6,17 @@ const checkAuthMiddleware = require('../middleware/check-auth.js');
 
 router.get('/readallreviews', ReviewsController.readAllReviews);
 
-router.get('/readreviewsbybusiness', ReviewsController.readReviewsByBusiness);
+router.post('/readreviewsbybusiness', ReviewsController.readReviewsByBusiness);
 
-router.get('/readreviewsbystars', ReviewsController.readReviewsByStars);
+router.post('/readreviewsbystars', ReviewsController.readReviewsByStars);
 
-router.get('/readreviewsbyuser', ReviewsController.readReviewsByUser);
+router.post('/readreviewsbyuser', ReviewsController.readReviewsByUser);
 
-router.get('/readreviewsbylanguage', ReviewsController.readReviewsByLanguage);
+router.post('/readreviewsbylanguage', ReviewsController.readReviewsByLanguage);
 
 router.post('/createreview', checkAuthMiddleware.checkAuth, ReviewsController.createReview);
 
-router.get('/deletereview', checkAuthMiddleware.checkAuth, ReviewsController.deleteReview);
+router.delete('/deletereview', checkAuthMiddleware.checkAuth, ReviewsController.deleteReview);
 
 router.patch('/updatetextinreview', checkAuthMiddleware.checkAuth, ReviewsController.updateTextInReview);
 

@@ -3,17 +3,14 @@ info:
   title: Reviews-System API
   description: Node.js + MySQL - API documentation
   version: 1.0.0
-
+  
 tags:
   - name: Auth
     description: User authentication
-
   - name: Users
     description: Manage users
-
   - name: Businesses
     description: Manage businesses
-
   - name: Reviews
     description: Manage reviews
 
@@ -38,10 +35,10 @@ paths:
               properties:
                 email:  
                   type: string
-                  example: "test@gmail.com"
+                  example: "pedro@gmail.com"
                 password:
                   type: string
-                  example: "1234"
+                  example: "12345"
               required:
                 - email
                 - password
@@ -55,12 +52,12 @@ paths:
                 properties:
                   acessToken:
                     type: string
-                    example: "string"
+                    example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNodWNrQGdtYWlsLmNvbSIsImlkIjoyMywiaWF0IjoxNjIxNTE5NjA4LCJleHAiOjE2MjE1MjAyMDh9.SUuvvWanBMyPOcKdlEw7R_q_qPVSX9qgGq3B8rDs2_8"
                   refreshToken:
                     type: string
-                    example: "string"
+                    example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNodWNrQGdtYWlsLmNvbSIsImlkIjoyMywiaWF0IjoxNjIxNTE5NjA4fQ.eNoQvzcRuujIH0UMUY54-UDeqPX79XFsRNxaOAwt_tc"
         "401":
-          description: User is unauthorized
+          $ref: "#/components/responses/UnauthorizedError"
         "400":
           description: The email or password is incorrect
           content:
@@ -99,15 +96,49 @@ paths:
                     type: string
                     example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNodWNrQGdtYWlsLmNvbSIsImlkIjoyMywiaWF0IjoxNjIxMzcwNzAyLCJleHAiOjE2MjEzNzEzMDJ9.9qXuZ1vucbCKgnAwMbg5gJaMlzUZrds-zU3xGtTrVlg"
         "401":
-          description: User is unauthorized
+          $ref: "#/components/responses/UnauthorizedError"
         "403":
           description:  Forbidden
-
   /logout:
-    post:
+    delete:
       tags:
         - Auth
       summary: Logs out current logged in user session
+      descrption: Refresh token is deleted from the database
+      security:
+        - bearerAuth: []
+      parameters:
+       -  in: header
+          name: Token
+          schema: 
+            type: string
+            example: "Token" 
+          required: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                token:  
+                  type: string
+                  example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNodWNrQGdtYWlsLmNvbSIsImlkIjoyMywiaWF0IjoxNjIxMzY5MjA1fQ.J38ddVRn8G7LIqeShsqeJOQpyFadCBH-3BlBp3RXrNs"
+      responses:
+        "204":
+          description: User logged out
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  accessToken:
+                    type: string
+                    example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNodWNrQGdtYWlsLmNvbSIsImlkIjoyMywiaWF0IjoxNjIxMzcwNzAyLCJleHAiOjE2MjEzNzEzMDJ9.9qXuZ1vucbCKgnAwMbg5gJaMlzUZrds-zU3xGtTrVlg"
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
+        "403":
+          description:  Forbidden
 
 # *** Users ***
   /createuser:
@@ -137,7 +168,7 @@ paths:
                   example: "john@gmail.com"
                 password:
                   type: string
-                  example: "pass123"
+                  example: "12345"
                 country:
                   type: string
                   example: "Denmark"
@@ -153,12 +184,13 @@ paths:
         "201":
           description: "A user was created"
           content:
-            schema:
-              type: object
-              properties:
-                message:
-                  type: string
-                  example: "Registration successful"
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Registration successful"
   /readallusers:
     get:
       tags:
@@ -171,57 +203,179 @@ paths:
           name: Token
           schema: 
             type: string
-            example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNodWNrQGdtYWlsLmNvbSIsImlkIjoyMywiaWF0IjoxNjIxNTA1NTMyLCJleHAiOjE2MjE1MDYxMzJ9.2REuDzee22_1l2AItLg5bkqiiof-MVDn9sv69TmwbiE   
-      reponses:
+            example: "Token" 
+          required: true
+      responses:
         "200":
-          description: Success Response
-          constent:
-            application/json:
+          description: List of all users details
+          content:
               schema:
-                type: object
+                $ref: '#/components/schemas/User'
                 properties:
                   message:
                     type: string
                     example: "OK"
-        "400":
-          description: Bad Request
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
+  /readuser:
+    get:
+      tags:
+       - Users
+      summary: Get user
+      security:
+        - bearerAuth: []
+      parameters:
+       -  in: header
+          name: Token
+          schema: 
+            type: string
+            example: "Token" 
+          required: true
+      responses:
+        "200":
+          description: Single user details
+          content:
+            schema:
+              $ref: '#/components/schemas/User'
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
+        "404":
+           $ref: "#/components/responses/NotFoundError"
+  /deleteuser:
+    delete:
+      tags:
+        - Users
+      summary: Delete user
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: header
+          name: Token
+          schema: 
+            type: string
+            example: "Token" 
+          required: true
+      responses:
+        "200":
+          description: User deleted
+          content:
+            schema:
+              $ref: '#/components/schemas/User'
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
+        "404":
+          $ref: "#/components/responses/NotFoundError"
+  /updateprofilepictureinuser:
+    patch:
+      tags:
+        - Users
+      summary: Updates user's picture
+      security:
+        - bearerAuth: []
+      parameters:
+       -  in: header
+          name: Token
+          schema: 
+            type: string
+            example: "Token" 
+          required: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                profilePicture:
+                  type: string
+                  example: "http://dummyimage.com/180x103.png/5fa2dd/ffffff"
+      responses:
+        "200":
+          description: Picture uploaded
           content:
             application/json:
               schema:
                 type: object
                 properties:
-                  message:
+                  profilePicture:
                     type: string
-                    example: "Invalid token"
-  /readuser:
-    get:
-      tags:
-       - Users
-      summary: Get a user
-
-  /deleteuser:
-    get:
-      tags:
-        - Users
-      summary: Delete user
-
-  /updateprofilepictureinuser:
-    patch:
-      tags:
-        - Users
-      summary: Updates a user's image
-  
+                    example: "http://dummyimage.com/180x103.png/5fa2dd/ffffff"
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
   /updatecountryinuser:
     patch:
       tags:
         - Users
-      summary: Updates a user's country
-  
+      summary: Updates country in  user
+      security:
+        - bearerAuth: []
+      parameters:
+       -  in: header
+          name: Token
+          schema: 
+            type: string
+            example: "Token" 
+          required: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                country:
+                  type: string
+                  example: "Denmark"
+      responses:
+        "200":
+          description: Country updated
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  country:
+                    type: string
+                    example: "Denmark
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
   /updatecityinuser:
     patch:
       tags:
         - Users
-      summary: Updates a user's city
+      summary: Updates country in  user
+      security:
+        - bearerAuth: []
+      parameters:
+       -  in: header
+          name: Token
+          schema: 
+            type: string
+            example: "Token" 
+          required: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                city:
+                  type: string
+                  example: "Copenhagen"
+      responses:
+        "200":
+          description: Country updated
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  city:
+                    type: string
+                    example: "Copenhagen
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
 
 # *** Businesses ***
   /createbusiness:
@@ -229,42 +383,366 @@ paths:
       tags:
         - Businesses
       summary: Create a business
-
+      operationId: create
+      security:
+        - bearerAuth: []
+      parameters:
+       -  in: header
+          name: Token
+          schema: 
+            type: string
+            example: "Token" 
+          required: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                  example: "Photobeast"
+                description:
+                  type: string
+                  example: "i sell stuff"
+                category:
+                  type: string
+                  example: "photo"
+                address:
+                  type: string
+                  example: "street123"
+                city:
+                  type: string
+                  example: "hong kong"
+                country:
+                  type: string
+                  example: "China"
+                postCode:
+                  type: string
+                  example: "2300"
+                phoneNumber:
+                  type: string
+                  example: "111-111"
+                webSite:
+                  type: string
+                  example: "myWebsite"
+                email:
+                  type: string
+                  example: test@gmail.com
+              required:
+                - title
+                - description
+                - category
+                - address
+                - country
+                - postCode
+                - phoneNumber
+                - webSite
+                - email
+      responses: 
+        "201":
+          description: "A busiiness was created"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Business created"
   /readallbusinesses:
     get:
       tags:
         - Businesses
       summary: Get all businesses
-  
-  /readbusiness/:id:
+      security:
+        - bearerAuth: []
+      parameters:
+       -  in: header
+          name: Token
+          schema: 
+            type: string
+            example: "Token" 
+          required: true
+      responses:
+        "200":
+          description: List of all businesses details
+          content:
+              schema:
+                $ref: '#/components/schemas/Business'
+                properties:
+                  message:
+                    type: string
+                    example: "OK"
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
+  /readbusiness/{id}:
     get:
       tags:
        - Businesses
       summary: Get a business by ID
-
+      security:
+        - bearerAuth: []
+      parameters:
+       -  in: header
+          name: Token
+          schema: 
+            type: string
+            example: "Token" 
+          required: true
+       -  in: path
+          name: id
+          schema: 
+            type: integer
+            example: "id" 
+          required: true
+      responses:
+        "200":
+          description: Find business by ID
+          content:
+            schema:
+              $ref: '#/components/schemas/Business'
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
+        "404":
+           $ref: "#/components/responses/NotFoundError"
   /deletebusiness:
-    get:
+    delete:
       tags:
         - Businesses
       summary: Delete a business
-
-  /updatemailinbusiness:
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: header
+          name: Token
+          schema: 
+            type: string
+            example: "Token" 
+          required: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:  
+                  type: id
+                  example: 42
+              required:
+                - id
+      responses:
+        "200":
+          description: Business deleted
+          content:
+            schema:
+              $ref: '#/components/schemas/Business'
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
+        "404":
+          $ref: "#/components/responses/NotFoundError"
+  /updatetitleinbusiness:
+    patch:
+      tags:
+        - Businesses
+      summary: Updates title in a business
+      security:
+        - bearerAuth: []
+      parameters:
+       -  in: header
+          name: Token
+          schema: 
+            type: string
+            example: "Token" 
+          required: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: integer
+                  example: 50 
+                title:
+                  type: string
+                  example: "myNewBusiness"
+      responses:
+        "200":
+          description: Business title updated
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  title:
+                    type: string
+                    example: "myNewBusiness"
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
+  /updatedescriptioninbusiness:
+    patch:
+      tags:
+        - Businesses
+      summary: Updates business description
+      security:
+        - bearerAuth: []
+      parameters:
+       -  in: header
+          name: Token
+          schema: 
+            type: string
+            example: "Token" 
+          required: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: integer
+                  example: 51
+                description:
+                  type: string
+                  example: "myNewDescription"
+      responses:
+        "200":
+          description: Business description updated
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  title:
+                    type: string
+                    example: "myNewDescription"
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
+  /updateemailinbusiness:
     patch:
       tags:
         - Businesses
       summary: Updates a business email
-  
+      security:
+        - bearerAuth: []
+      parameters:
+       -  in: header
+          name: Token
+          schema: 
+            type: string
+            example: "Token" 
+          required: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: integer
+                  example: 41
+                email:
+                  type: string
+                  example: "newEmail@gmail.com"
+      responses:
+        "200":
+          description: Business email updated
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  title:
+                    type: string
+                    example: "newEmail@gmail.com"
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
   /updatephonenumberinbusiness:
     patch:
       tags:
         - Businesses
-      summary: Updates a business phone number
-  
+      summary: Updates a business phone number 
+      security:
+        - bearerAuth: []
+      parameters:
+       -  in: header
+          name: Token
+          schema: 
+            type: string
+            example: "Token" 
+          required: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: integer
+                  example: 41
+                phoneNumber:
+                  type: string
+                  example: "222-222-000"
+      responses:
+        "200":
+          description: Business phone number updated
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  title:
+                    type: string
+                    example: "222-222-000"
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
   /updatewebsiteinbusiness:
     patch:
       tags:
         - Businesses
       summary: Updates a business website
+      security:
+        - bearerAuth: []
+      parameters:
+       -  in: header
+          name: Token
+          schema: 
+            type: string
+            example: "Token" 
+          required: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: integer
+                  example: 41
+                webSite:
+                  type: string
+                  example: "newWebSite.com"
+      responses:
+        "200":
+          description: Business web site updated
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  title:
+                    type: string
+                    example: "newWebSite.com"
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
 
 # *** Reviews ***
   /createreview:
@@ -272,61 +750,480 @@ paths:
       tags:
         - Reviews
       summary: Create a review
-
+      operationId: create
+      security:
+        - bearerAuth: []
+      parameters:
+       -  in: header
+          name: Token
+          schema: 
+            type: string
+            example: "Token" 
+          required: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                reviewText:
+                  type: string
+                  example: "Some review text"
+                stars:
+                  type: integer
+                  example: 5
+                reviewDate:
+                  type: string
+                  example: "2021-03-03"
+                likeCount:
+                  type: integer
+                  example: 1
+                BusinessID:
+                  type: integer
+                  example: 43
+                LanguageID:
+                  type: integer
+                  example: 1
+              required:
+                - reviewText
+                - stars
+                - reviewDate
+                - likeCount
+                - BusinessID
+                - LanguageID
+      responses: 
+        "201":
+          description: "Review created"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Review created"
   /readallreviews:
     get:
       tags:
         - Reviews
       summary: Get all reviews
-  
+      security:
+        - bearerAuth: []
+      parameters:
+       -  in: header
+          name: Token
+          schema: 
+            type: string
+            example: "Token" 
+          required: true
+      responses:
+        "200":
+          description: List of all reviews details
+          content:
+              schema:
+                $ref: '#/components/schemas/Review'
+                properties:
+                  message:
+                    type: string
+                    example: "OK"
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
   /readreviewsbybusiness:
-    get:
+    post:
       tags:
        - Reviews
       summary: Get reviews by business
-
+      security:
+        - bearerAuth: []
+      parameters:
+       -  in: header
+          name: Token
+          schema: 
+            type: string
+            example: "Token" 
+          required: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: integer
+                  example: 2
+      responses:
+        "200":
+          description: Read reviews for a particular business
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    example: 2
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
   /readreviewsbystars:
-    get:
+    post:
       tags:
        - Reviews
       summary: Get reviews by stars
-  
+      security:
+        - bearerAuth: []
+      parameters:
+       -  in: header
+          name: Token
+          schema: 
+            type: string
+            example: "Token" 
+          required: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                stars:
+                  type: integer
+                  example: 2
+      responses:
+        "200":
+          description: Read reviews with a specific number of stars
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  stars:
+                    type: integer
+                    example: 2
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
   /readreviewsbyuser:
-    get:
+    post:
       tags:
        - Reviews
       summary: Get reviews by user
-  
+      security:
+        - bearerAuth: []
+      parameters:
+       -  in: header
+          name: Token
+          schema: 
+            type: string
+            example: "Token" 
+          required: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: integer
+                  example: 2
+      responses:
+        "200":
+          description: Read reviews by a specific user
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    example: 2
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
   /readreviewsbylanguage:
-    get:
+    post:
       tags:
        - Reviews
-      summary: Get reviews by language
-  
+      summary: Find reviews by language
+      security:
+        - bearerAuth: []
+      parameters:
+       -  in: header
+          name: Token
+          schema: 
+            type: string
+            example: "Token" 
+          required: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: integer
+                  example: 1
+      responses:
+        "200":
+          description: Read reviews for a particular business
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    example: 1
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
   /deletereview:
-    get:
+    delete:
       tags:
         - Reviews
       summary: Delete a review
-
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: header
+          name: Token
+          schema: 
+            type: string
+            example: "Token" 
+          required: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:  
+                  type: id
+                  example: 285
+              required:
+                - id
+      responses:
+        "200":
+          description: Review deleted
+          content:
+            schema:
+              $ref: '#/components/schemas/Review'
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
+        "404":
+          $ref: "#/components/responses/NotFoundError"
   /updatetextinreview:
     patch:
       tags:
         - Reviews
       summary: Updates text in a review
-  
+      security:
+        - bearerAuth: []
+      parameters:
+       -  in: header
+          name: Token
+          schema: 
+            type: string
+            example: "Token" 
+          required: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: integer
+                  example: 288
+                reviewText:
+                  type: string
+                  example: "new review text"
+      responses:
+        "200":
+          description: Review text updated
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  title:
+                    type: string
+                    example: "new review text"
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
   /updatestarsinreview:
     patch:
       tags:
         - Reviews
       summary: Updates stars in a review
-  
+      security:
+        - bearerAuth: []
+      parameters:
+       -  in: header
+          name: Token
+          schema: 
+            type: string
+            example: "Token" 
+          required: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: integer
+                  example: 285
+                stars:
+                  type: integer
+                  example: 4
+      responses:
+        "200":
+          description: Review stars updated
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  stars:
+                    type: integer
+                    example: 3
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
   /updatelikeinreview:
     patch:
       tags:
         - Reviews
-      summary: Updates likes in a review"
+      summary: Updates 'likes' count in a review"
+      security:
+        - bearerAuth: []
+      parameters:
+       -  in: header
+          name: Token
+          schema: 
+            type: string
+            example: "Token" 
+          required: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: integer
+                  example: "288"
+      responses:
+        "200":
+          description: Review 'likes' count updated
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    example: 288
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
 
-  
-  
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  schemas:
+    User:
+      type: object
+      properties:
+        ID:
+          type: integer
+        firstName:
+          type: string
+        lastName:
+          type: string
+        profilePicture:
+          type: string
+        password:
+          type: string
+        email:
+          type: string
+        country:
+          type: string
+        city:
+          type: string
+        numberOfReviews:
+          type: integer
+        numberOfLikes:
+          type: integer
+        numberOfPhotos:
+          type: integer
+    Business:
+      type: object
+      properties:
+        ID:
+          type: integer
+        title:
+          type: string
+        description:
+          type: integer
+        category:
+          type: string
+        address:
+          type: string
+        city:
+          type: string
+        country:
+          type: string
+        postCode:
+          type: string
+        phoneNumber:
+          type: string
+        webSite:
+          type: string
+        email:
+          type: string  
+    Review:
+      type: object
+      properties:
+        ID:
+          type: integer
+        reviewText:
+          type: string
+        stars:
+          type: integer
+        reviewDate:
+          type: string
+        likeCount:
+          type: integer
+        UserID:
+          type: integer
+        BusinessID:
+          type: integer
+        LanguageID:
+          type: integer
+  responses:
+    UnauthorizedError:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                example: "Unauthorized"
+    NotFoundError:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                message:
+                  type: string
+                  example: "Not Found"
 

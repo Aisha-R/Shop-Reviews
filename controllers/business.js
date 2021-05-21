@@ -3,6 +3,7 @@ const BusinessDetails = require('../models/BusinessDetails.js');
 const WorkingHours = require('../models/WorkingHours.js');
 
 exports.readAllBusinesses = async (req, res) => {
+    
     try {
         const businesses = await Business.query().select();
 
@@ -16,6 +17,7 @@ exports.readAllBusinesses = async (req, res) => {
 
 exports.readBusiness = async (req, res) => {
     const id = req.params.id;
+    console.log(id)
     
     try {
         const business = await Business.query().findById(id);
@@ -89,6 +91,7 @@ exports.createBusiness = async (req, res) => {
 exports.deleteBusiness = async (req, res) => {
 
     const id = req.body.id;
+    console.log(id)
 
     try {
 

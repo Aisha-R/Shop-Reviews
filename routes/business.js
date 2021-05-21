@@ -10,7 +10,7 @@ router.get('/readbusiness/:id', BusinessController.readBusiness);
 
 router.post('/createbusiness', checkAuthMiddleware.checkAuth, BusinessController.createBusiness);
 
-router.get('/deletebusiness', checkAuthMiddleware.checkAuth, BusinessController.deleteBusiness);
+router.delete('/deletebusiness', checkAuthMiddleware.checkAuth, BusinessController.deleteBusiness);
 
 router.patch('/updatetitleinbusiness', checkAuthMiddleware.checkAuth, BusinessController.updateTitleInBusiness);
 

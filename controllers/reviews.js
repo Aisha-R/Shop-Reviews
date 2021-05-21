@@ -74,7 +74,7 @@ exports.createReview = async (req, res) => {
     console.log(req.body);
     console.log(req.user.id);
     try {
-        consolelog('!')
+        console.log('!')
         await Review.query().insert({
             reviewText, 
             stars, 
@@ -84,11 +84,11 @@ exports.createReview = async (req, res) => {
             BusinessID, 
             LanguageID
         });
-
+        console.log('Helo')
         return res.sendStatus(200);
 
     } catch (error) {
-        
+        console.log('Here');
         return res.sendStatus(500);
     }
 };

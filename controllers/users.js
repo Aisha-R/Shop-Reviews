@@ -111,12 +111,14 @@ exports.updateCountryInUser = async (req, res) => {
 exports.updateProfilePictureInUser = async (req, res) => {
 
     const { profilePicture } = req.body;
+    console.log(req.user.id)
 
     try {
 
         await User.query().findById(req.user.id).patch({ profilePicture });
-
+        console.log('Ok!')
         return res.sendStatus(200);
+       
 
     } catch (error) {
         

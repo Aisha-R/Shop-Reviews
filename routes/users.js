@@ -17,7 +17,7 @@ router.get('/readuser', checkAuthMiddleware.checkAuth, UsersController.readUser)
 
 router.post('/createuser', UsersController.createUser);
 
-router.get('/deleteuser', checkAuthMiddleware.checkAuth, UsersController.deleteUser);
+router.delete('/deleteuser', checkAuthMiddleware.checkAuth, UsersController.deleteUser);
 
 router.patch('/updateprofilepictureinuser', checkAuthMiddleware.checkAuth, UsersController.updateProfilePictureInUser);
 

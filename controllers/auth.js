@@ -60,20 +60,11 @@ exports.token = async (req, res) => {
 };
 
 exports.logout = async (req, res) => {
-
-    console.log(req.body.token);
-    try {
-
-        await RefreshToken.query().delete().where('refreshToken', req.body.token);
-
-    } catch (error) {
-
-        return res.sendStatus(500);
-    }
-  
+    await RefreshToken.query().delete().where('refreshToken', req.body.token);
+    
     return res.sendStatus(204);
 };
 
 const generateAccessToken = (user) => {
-    return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '10m'});
+    return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '60m'});
 }

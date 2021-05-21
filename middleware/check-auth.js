@@ -10,6 +10,7 @@ const checkAuth = (req, res, next) => {
 
     jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (error, user) => {
         if (error) {
+            console.log('!!!')
             return res.sendStatus(403);
         }
 
