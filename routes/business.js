@@ -1,26 +1,30 @@
-const router = require('express').Router();
+const router = require("express").Router();
 
-const BusinessController = require('../controllers/business.js');
+const BusinessController = require("../controllers/business.js");
 
-const checkAuthMiddleware = require('../middleware/check-auth.js');
+const checkAuthMiddleware = require("../middleware/check-auth.js");
+const parseListParameters = require("../middleware/parse-list-params");
 
-router.get('/readallbusinesses', BusinessController.readAllBusinesses);
+router.get("/businesses", parseListParameters, BusinessController.getAll);
 
-router.get('/readbusiness/:id', BusinessController.readBusiness);
+router.get("/businesses/:id", BusinessController.getOne);
 
-router.post('/createbusiness', checkAuthMiddleware.checkAuth, BusinessController.createBusiness);
+router.post(
+  "/businesses",
+  checkAuthMiddleware.checkAuth,
+  BusinessController.create
+);
 
-router.delete('/deletebusiness', checkAuthMiddleware.checkAuth, BusinessController.deleteBusiness);
+router.delete(
+  "/businesses/:id",
+  checkAuthMiddleware.checkAuth,
+  BusinessController.deleteBusiness
+);
 
-router.patch('/updatetitleinbusiness', checkAuthMiddleware.checkAuth, BusinessController.updateTitleInBusiness);
-
-router.patch('/updatedescriptioninbusiness', checkAuthMiddleware.checkAuth, BusinessController.updateDescriptionInBusiness);
-
-router.patch('/updateemailinbusiness', checkAuthMiddleware.checkAuth, BusinessController.updateEmailInBusiness);
-
-router.patch('/updatephonenumberinbusiness', checkAuthMiddleware.checkAuth, BusinessController.updatePhoneNumberInBusiness);
-
-router.patch('/updatewebsiteinbusiness', checkAuthMiddleware.checkAuth, BusinessController.updateWebsiteInBusiness);
-
+router.put(
+  "/businesses/:id",
+  checkAuthMiddleware.checkAuth,
+  BusinessController.update
+);
 
 module.exports = router;
