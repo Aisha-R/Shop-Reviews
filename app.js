@@ -1,28 +1,27 @@
 require('dotenv').config();
 
 const express = require('express');
-const mysql = require('mysql');
+/* const mysql = require('mysql'); */
 const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-const connection = mysql.createConnection({
+/* const connection = mysql.createConnection({
     host: process.env.HOST,
     user: process.env.USER,
     password: process.env.PASSWORD,
     database: process.env.DATABASE,
     multipleStatements: false
-});
+}); */
 
-connection.connect( (error) => {
+/* connection.connect( (error) => {
     if (error) {
         console.log(error);
     } else {
         console.log("Connected to the MySQL Server.");
     }
-});
-
+}); */
 
 
 // swagger docs route

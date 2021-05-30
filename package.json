@@ -20,6 +20,7 @@
   "homepage": "https://github.com/Aisha-R/database_mandatory_II#readme",
   "dependencies": {
     "bcrypt": "^5.0.1",
+    "colors": "^1.4.0",
     "cors": "^2.8.5",
     "cross-env": "^7.0.3",
     "dotenv": "^8.2.0",
@@ -28,6 +29,8 @@
     "jsonwebtoken": "^8.5.1",
     "knex": "^0.95.4",
     "method-override": "^3.0.0",
+    "mongodb": "^3.6.9",
+    "mongoose": "^5.12.12",
     "mysql": "^2.18.1",
     "nodemon": "^2.0.7",
     "objection": "^2.2.15",
