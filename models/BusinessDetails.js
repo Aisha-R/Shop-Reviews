@@ -1,17 +1,41 @@
-const { Model } = require('objection');
+const mongoose = require('mongoose');
 
-const Business = require('./Business.js');
+const BusinessDetailsSchema = new mongoose.Schema({
+  acceptsCreditCard: {
+    type: Number,
+    required: true
+  },
+  acceptsReservations: {
+    type: Number,
+    required: true
+  },
+  delivers: {
+    type: Number,
+    required: true
+  },
+  offersTakeout: {
+    type: Number,
+    required: true
+  },
+  freeWifi: {
+    type: Number,
+    required: true
+  },
+  outDoorSeating: {
+    type: Number,
+    required: true
+  },
+  driveThrough: {
+    type: Number,
+    required: true
+  },
+  priceRange: {
+    type: Number,
+    required: true
+  }
+});
 
-class BusinessDetails extends Model {
-    static get idColumn() {
-        return 'ID';
-    }
-    static get tableName() {
-        return 'business_details';
-    }
+// Static method to get avg stars
+/* BusinessSchema.statics.getAverageStars = async function() */
 
-
-}
-
-module.exports = BusinessDetails;
-
+ module.exports = BusinessDetailsSchema; 

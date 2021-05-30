@@ -1,59 +1,81 @@
-const BusinessDetails = require("./BusinessDetails");
-const WorkingHours = require("./WorkingHours");
-const { Model } = require('objection');
+const mongoose = require('mongoose');
+const BusinessDetails = require('./BusinessDetails');
+const WorkingHoursSchema = require('./WorkingHours');
 
-class Business extends Model {
-
-    static get idColumn() {
-        return 'ID';
+const BusinessSchema = new mongoose.Schema({
+  title: {
+    type: String,
+    required: true,
+    //required: [true, 'Please add title']
+  },
+  description: {
+    type: String,
+    //required: [true, 'Please add description']
+  },
+  category: {
+    type: String,
+    required: false
+  },
+  address: {
+    type: String,
+    required: true
+  },
+  city: {
+    type: String,
+    required: false,
+  },
+  country: {
+    type: String,
+    required: false,
+  },
+  postCode: {
+    type: String,
+    required: true
+  },
+  phoneNumber: {
+    type: String,
+    required: true
+  },
+  webSite: {
+    type: String,
+    required: true
+  },
+  email: {
+    type: String,
+    required: true
+  },
+  reviewCount: {
+    type: Number,
+    required: true
+  },
+  photos: [
+    {
+      type: mongoose.Schema.ObjectId,
+      ref: 'Photo',
+      required: true
     }
-    static get tableName() {
-        return 'business';
+  ],
+  workingHours: 
+    WorkingHoursSchema,
+  /* reviews: [
+    {
     }
+  ], */
+  details: 
+    BusinessDetails, 
+  user: {
+    type: mongoose.Schema.ObjectId,
+    ref: 'User',
+    required: true
+  },
+  averageStars: {
+    type: String,
+    required: false
+  }
+});
 
-    static get jsonSchema() {
-        return {
-          type: 'object',
-          required: ['title', 'address', 'city', 'country', 'postCode', 'detailsID', 'userID'],
-          properties: {
-            id: { type: 'integer' },
-            title: { type: 'string', minLength: 1, maxLength: 50 },
-            description: { type: 'string', minLength: 1, maxLength: 200 },
-            category: { type: 'string', minLength: 1, maxLength: 200 },
-            address: { type: 'string', minLength: 1, maxLength: 100 },
-            country: { type: 'string', minLength: 1, maxLength: 50 },
-            city: { type: 'string', minLength: 1, maxLength: 50 },
-            postCode: { type: 'string', minLength: 1, maxLength: 20 },
-            phoneNumber: { type: 'string', minLength: 1, maxLength: 20 },
-            webSite: { type: 'string', minLength: 1, maxLength: 50 },
-            email: { type: 'string', minLength: 1, maxLength: 50 },
-            detailsID: { type: 'integer' },
-            userID: { type: 'integer' }
-          }
-        };
-    }
-    static get relationMappings() {
-        return {
-            details: {
-                relation: Model.HasOneRelation,
-                modelClass: BusinessDetails,
-                join: {
-                    from: 'business.detailsID',
-                    to:  'business_details.ID',
-                }
-            },
-            workingHours: {
-                relation: Model.HasManyRelation,
-                modelClass: WorkingHours,
-                join: {
-                    from: 'business.ID',
-                    to:  'working_hours.BusinessID',
-                }
-            }
+// Static method to get avg stars
+/* BusinessSchema.statics.getAverageStars = async function() */
 
-        }
-    }
 
-}
-
-module.exports = Business;
+module.exports = mongoose.model('Business', BusinessSchema);

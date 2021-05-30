@@ -1,11 +1,12 @@
-const { Model } = require('objection');
+const mongoose = require('mongoose');
 
-class Language extends Model {
-
-    static get tableName() {
-        return 'language';
+const LanguageSchema = new mongoose.Schema(
+  {
+    languageName: {
+      type: String,
+      required: true
     }
-
-}
-
-module.exports = Language;
+  }
+);
+ 
+module.exports = LanguageSchema;

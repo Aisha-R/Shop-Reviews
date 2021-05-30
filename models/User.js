@@ -1,31 +1,48 @@
-const { Model } = require('objection');
+const mongoose = require('mongoose');
 
-class User extends Model {
+const UserSchema = new mongoose.Schema ({
+  firstName: {
+    type: String,
+    required: true
+  },
+  lastName: {
+    type: String,
+    required: true
+  },
+  profilePicture: {
+    type: String,
+    trim: true
+  },
+  password: {
+    type: String,
+    required: true
+  },
+  email: {
+    type: String,
+    required: true,
+    unique: true,
+  },
+  country: {
+    type: String,
+    required: true
+  },
+  city: {
+    type: String,
+    required: true
+  },
+  numberOfReviews: {
+    type: Number,
+  },
+  numberOfLikes: {
+    type: Number,
+  },
+  numberOfPhotos: {
+    type: Number,
+  }
 
-    static get tableName() {
-        return 'user';
-    }
+});
 
-    static get jsonSchema() {
-        return {
-          type: 'object',
-          required: ['firstName', 'lastName', 'email', 'password'],
-          properties: {
-            id: { type: 'integer' },
-            firstName: { type: 'string', minLength: 1, maxLength: 50 },
-            lastName: { type: 'string', minLength: 1, maxLength: 50 },
-            profilePicture: { type: 'string', minLength: 1, maxLength: 200 },
-            password: { type: 'string', minLength: 1, maxLength: 200 },
-            email: { type: 'string', minLength: 1, maxLength: 50 },
-            country: { type: 'string', minLength: 1, maxLength: 50 },
-            city: { type: 'string', minLength: 1, maxLength: 50 }
-          }
-        };
-    }
-
-}
-
-module.exports = User;
+module.exports = mongoose.model('User', UserSchema);
 
  
 

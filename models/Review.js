@@ -1,26 +1,46 @@
-const { Model } = require("objection");
+const mongoose = require('mongoose');
+const LanguageSchema = require('./Language');
+const PhotoSchema = require('./Photo');
 
-class Review extends Model {
-  static get tableName() {
-    return "review";
-  }
+const ReviewSchema = new mongoose.Schema({
+  reviewText: {
+    type: String,
+    //required: true
+    //required: [true, 'Please add some text']
+  },
+  stars: {
+    type: Number,
+    min: 1,
+    max: 5,
+    required: true
+    //required: [true, 'Please add rating between 1 and 5']
+  },
+  reviewDate: {
+    type: Date,
+    default: Date.now
+  },
+  likeCount: {
+    type: Number,
+    required: true
+  },
+  photos: 
+      PhotoSchema,
+  user: {
+    type: mongoose.Schema.ObjectId,
+    ref: 'User',
+    //required: true
+  },
+  business: {
+    type: mongoose.Schema.ObjectId,
+    ref: 'Business',
+    //required: true
+  }, 
+   language: 
+      LanguageSchema
+});
 
-  static get jsonSchema() {
-    return {
-      type: "object",
-      required: ["stars", "reviewDate", "UserID", "BusinessID"],
-      properties: {
-        id: { type: "integer" },
-        reviewText: { type: "string", minLength: 1, maxLength: 2500 },
-        stars: { type: "integer" },
-        reviewDate: { type: "string", minLength: 1, maxLength: 50 },
-        likeCount: { type: "integer" },
-        UserID: { type: "integer" },
-        BusinessID: { type: "integer" },
-        LanguageID: { type: "integer" }
-      }
-    };
-  }
-}
+// Prevent user from making more than one review per Business
 
-module.exports = Review;
+// Static method to get average stars and save
+
+module.exports = mongoose.model('Review', ReviewSchema);

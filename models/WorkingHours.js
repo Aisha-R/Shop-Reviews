@@ -1,14 +1,32 @@
-const Business = require("./Business");
-const { Model } = require('objection');
+const mongoose = require('mongoose');
 
-class WorkingHours extends Model {
+const WorkingHoursSchema = new mongoose.Schema({
+  daysOfweek: {
+    type: String,
+    //required: true
+  },
+  openingAt: {
+    type: String,
+    //required: true
+  },
+  closingAt: {
+    type: String,
+    //required: true
+  },
+  pauseStart: {
+    type: String,
+    //required: true
+  },
+  pauseEnd: {
+    type: String,
+    //required: true
+  },
+  business: {
+    type: mongoose.Schema.ObjectId,
+    ref: 'Business'
+    //required: true
+  }
+  
+});
 
-    static get tableName() {
-        return 'working_hours';
-    }
-
-
-
-}
-
-module.exports = WorkingHours;
+module.exports = WorkingHoursSchema;

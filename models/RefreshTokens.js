@@ -1,11 +1,11 @@
-const { Model } = require('objection');
+const mongoose = require('mongoose');
 
-class RefreshToken extends Model {
+const RefreshToken = new mongoose.Schema({
+  refreshToken: {
+    type: String,
+    required: true
+  }
+  
+});
 
-    static get tableName() {
-        return 'refresh_tokens';
-    }
-
-}
-
-module.exports = RefreshToken;
+module.exports = mongoose.model('RefreshToken', RefreshToken);

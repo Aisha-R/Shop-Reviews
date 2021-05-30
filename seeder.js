@@ -26,35 +26,35 @@ mongoose.connect(process.env.MONGO_URI, {
 
 // Read JSON files
 const reviews = JSON.parse(
-  fs.readFileSync(`${__dirname}/_data/reviews.json`, 'utf-8')
+  fs.readFileSync(`${__dirname}/db/reviews.json`, 'utf-8')
 );
 
 const users = JSON.parse(
-  fs.readFileSync(`${__dirname}/_data/users.json`, 'utf-8')
+  fs.readFileSync(`${__dirname}/db/users.json`, 'utf-8')
 );
 
 const businesses = JSON.parse(
-  fs.readFileSync(`${__dirname}/_data/businesses.json`, 'utf-8')
+  fs.readFileSync(`${__dirname}/db/businesses.json`, 'utf-8')
 );
 
 const businessDetails = JSON.parse(
-  fs.readFileSync(`${__dirname}/_data/business_details.json`, 'utf-8')
+  fs.readFileSync(`${__dirname}/db/business_details.json`, 'utf-8')
 );
 
 const languages = JSON.parse(
-  fs.readFileSync(`${__dirname}/_data/languages.json`, 'utf-8')
+  fs.readFileSync(`${__dirname}/db/languages.json`, 'utf-8')
 );
 
 const photos = JSON.parse(
-  fs.readFileSync(`${__dirname}/_data/photos.json`, 'utf-8')
+  fs.readFileSync(`${__dirname}/db/photos.json`, 'utf-8')
 );
 
 const workingHours = JSON.parse(
-  fs.readFileSync(`${__dirname}/_data/working_hours.json`, 'utf-8')
+  fs.readFileSync(`${__dirname}/db/working_hours.json`, 'utf-8')
 );
 
 const refreshTokens = JSON.parse(
-  fs.readFileSync(`${__dirname}/_data/refresh_tokens.json`, 'utf-8')
+  fs.readFileSync(`${__dirname}/db/refresh_tokens.json`, 'utf-8')
 );
 
 // Import into DB

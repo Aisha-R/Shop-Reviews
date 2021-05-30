@@ -6,7 +6,7 @@ const applyListOptions = require("../utils/apply-list-options");
 
 const getAll = async listOptions => {
   const SEARCH_FIELDS = ["title", "description", "category", "address"];
-  let query = Business.query().select();
+  let query = Business.find({});
   query = applyListOptions(SEARCH_FIELDS, query, listOptions);
   return query;
 };

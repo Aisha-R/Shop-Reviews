@@ -4,21 +4,21 @@ const applyListOptions = require("../utils/apply-list-options");
 
 const getAll = async listOptions => {
   const SEARCH_FIELDS = ["reviewText"];
-  let query = Review.query().select();
+  let query = Review.find({});
   query = applyListOptions(SEARCH_FIELDS, query, listOptions);
   return query;
 };
 
 const getOne = async id => {
-  return Review.query().findById(id);
+  return Review.findById(id);
 };
 
 const create = async (review, userId) => {
-  return await Review.query().insert({ ...review, UserID: userId });
+  return await Review.create({ ...review, UserID: userId });
 };
 
 const update = async (id, review) => {
-  await Review.query()
+  await Review
     .findById(id)
     .patch(review);
 
@@ -26,7 +26,7 @@ const update = async (id, review) => {
 };
 
 const delete_ = async id => {
-  await Review.query().deleteById(id);
+  await Review.findByIdAndDelete(id);
 };
 
 module.exports = {

@@ -34,7 +34,7 @@ exports.create = async (req, res) => {
 exports.deleteReview = async (req, res) => {
   const id = req.params.id;
   try {
-    const review = await Review.query().findById(id);
+    const review = await Review.findById(id);
 
     if (review.UserID === req.user.id) {
       await ReviewsService.delete_(id);
@@ -51,7 +51,7 @@ exports.update = async (req, res) => {
   const id = req.params.id;
   const reviewUpdate = req.body;
   try {
-    const review = await Review.query().findById(id);
+    const review = await Review.findById(id);
 
     if (review.UserID === req.user.id) {
       const updatedReview = await ReviewsService.update(id, reviewUpdate);

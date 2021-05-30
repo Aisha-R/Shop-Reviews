@@ -9,8 +9,8 @@ exports.login = async (req, res) => {
   const { email, password } = req.body;
 
   try {
-    const userFound = await User.query()
-      .select()
+    const userFound = await User
+      .find()
       .where("email", email)
       .limit(1);
 
@@ -23,7 +23,7 @@ exports.login = async (req, res) => {
         const accessToken = generateAccessToken(user);
         const refreshToken = jwt.sign(user, process.env.REFRESH_TOKEN_SECRET);
 
-        await RefreshToken.query().insert({
+        await RefreshToken.create({
           refreshToken: refreshToken
         });
         return res
@@ -45,8 +45,8 @@ exports.token = async (req, res) => {
     return res.sendStatus(401);
   }
 
-  const existingToken = await RefreshToken.query()
-    .select()
+  const existingToken = await RefreshToken
+    .find()
     .where("refreshToken", refreshToken);
 
   if (existingToken.length < 1) {
@@ -64,7 +64,7 @@ exports.token = async (req, res) => {
 };
 
 exports.logout = async (req, res) => {
-  await RefreshToken.query()
+  await RefreshToken
     .delete()
     .where("refreshToken", req.body.token);
   return res.sendStatus(204);

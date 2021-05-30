@@ -15,8 +15,8 @@ exports.createUser = async (req, res) => {
     city
   } = req.body;
   try {
-    const existing = await User.query()
-      .select()
+    const existing = await User
+      .find()
       .where("email", email)
       .limit(1);
     if (existing.length > 0) {
@@ -83,7 +83,7 @@ exports.updateCityInUser = async (req, res) => {
   const { city } = req.body;
 
   try {
-    await User.query()
+    await User
       .findById(req.user.id)
       .patch({ city });
 
@@ -97,7 +97,7 @@ exports.updateCountryInUser = async (req, res) => {
   const { country } = req.body;
 
   try {
-    await User.query()
+    await User
       .findById(req.user.id)
       .patch({ country });
 
@@ -109,13 +109,16 @@ exports.updateCountryInUser = async (req, res) => {
 
 exports.updateProfilePictureInUser = async (req, res) => {
   const { profilePicture } = req.body;
+  console.log(req.user.id);
 
   try {
-    await User.query()
+    await User
+       .findOneAndUpdate(req.user.id, { profilePicture }, { new: true }) 
+     /* await User
       .findById(req.user.id)
-      .patch({ profilePicture });
+      .patch({ profilePicture });  */
 
-    return res.sendStatus(200);
+    return res.sendStatus(200); 
   } catch (error) {
     return res.sendStatus(500);
   }

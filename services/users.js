@@ -4,21 +4,21 @@ const applyListOptions = require("../utils/apply-list-options");
 
 const getAll = async listOptions => {
   const SEARCH_FIELDS = ["firstName", "lastName", "email"];
-  let query = User.query().select();
+  let query = User.find({});
   query = applyListOptions(SEARCH_FIELDS, query, listOptions);
   return query;
 };
 
 const getOne = async id => {
-  return User.query().findById(id);
+  return User.findById(id);
 };
 
 const create = async user => {
-  return User.query().insert(user);
+  return User.create(user);
 };
 
 const delete_ = async id => {
-  await User.query().deleteById(id);
+  await User.findByIdAndDelete(id);
 };
 
 module.exports = {
