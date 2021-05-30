@@ -1,0 +1,82 @@
+[
+  {
+    "reviewText": "Morbi porttitor lorem id ligula. Suspendisse ornare consequat lectus. In est risus, auctor sed, tristique in, tempus sit amet, sem.\r\n\r\nFusce consequat. Nulla nisl. Nunc nisl.",
+    "stars": 3,
+    "reviewDate": "2020-05-11",
+    "likeCount": 0,
+    "language": {
+        "languageName": "English"
+      },
+    "photos": {
+      "photoUrl": "http://dummyimage.com/232x139.png/dddddd/000000",
+      "addedDate": "2020-05-11T00:00:00.000+00:00",
+      "user": "60ae1303ae455e5ed0de1edb",
+      "business": "60ae5aaf6e28d0bd004fa93f",
+      "review": "60ae21953d8e6275d79dea94"
+      }
+    },
+  {
+    "reviewText": null,
+    "stars": 2,
+    "reviewDate": "2020-04-30",
+    "likeCount": 0,
+    "language": {
+        "languageName": "French"
+      },
+    "photos": {
+      "photoUrl": "http://dummyimage.com/232x139.png/dddddd/000000",
+      "addedDate": "2020-05-11T00:00:00.000+00:00",
+      "user": "60ae1303ae455e5ed0de1edb",
+      "business": "60ae1e319a62916f41a4ac4e",
+      "review": "60ae21953d8e6275d79dea94"
+      }
+  },
+  {
+    "reviewText": "Curabitur in libero ut massa volutpat convallis. Morbi odio odio, elementum eu, interdum eu, tincidunt in, leo. Maecenas pulvinar lobortis est.\r\n\r\nPhasellus sit amet erat. Nulla tempus. Vivamus in felis eu sapien cursus vestibulum.\r\n\r\nProin eu mi. Nulla ac enim. In tempor, turpis nec euismod scelerisque, quam turpis adipiscing lorem, vitae mattis nibh ligula nec sem.",
+    "stars": 4,
+    "reviewDate": "2020-04-21",
+    "likeCount": 0,
+    "language": {
+        "languageName": "English"
+      },
+    "photos": {
+      "photoUrl": "http://dummyimage.com/232x139.png/dddddd/000000",
+      "addedDate": "2020-05-11T00:00:00.000+00:00",
+      "user": "60ae1303ae455e5ed0de1edb",
+      "business": "60ae5aaf6e28d0bd004fa93f",
+      "review": "60ae21953d8e6275d79dea94"
+      }
+  },
+  {
+    "reviewText": "Mauris enim leo, rhoncus sed, vestibulum sit amet, cursus id, turpis. Integer aliquet, massa id lobortis convallis, tortor risus dapibus augue, vel accumsan tellus nisi eu orci. Mauris lacinia sapien quis libero.\r\n\r\nNullam sit amet turpis elementum ligula vehicula consequat. Morbi a ipsum. Integer a nibh.\r\n\r\nIn quis justo. Maecenas rhoncus aliquam lacus. Morbi quis tortor id nulla ultrices aliquet.",
+    "stars": 3,
+    "reviewDate": "2020-05-26",
+    "likeCount": 0,
+    "language": {
+        "languageName": "Spanish"
+      },
+    "photos": {
+      "photoUrl": "http://dummyimage.com/232x139.png/dddddd/000000",
+      "addedDate": "2020-05-11T00:00:00.000+00:00",
+      "user": "60ae1303ae455e5ed0de1edb",
+      "business": "60ae59f15eead0bba04048ec",
+      "review": "60ae21953d8e6275d79dea94"
+      }
+  },
+  {
+    "reviewText": "Maecenas leo odio, condimentum id, luctus nec, molestie sed, justo. Pellentesque viverra pede ac diam. Cras pellentesque volutpat dui.",
+    "stars": 4,
+    "reviewDate": "2020-12-24",
+    "likeCount": 0,
+    "language": {
+      "languageName": "Danish"
+      },
+    "photos": {
+      "photoUrl": "http://dummyimage.com/232x139.png/dddddd/000000",
+      "addedDate": "2020-05-11T00:00:00.000+00:00",
+      "user": "60ae1303ae455e5ed0de1edb",
+      "business": "60ae5aaf6e28d0bd004fa93f",
+      "review": "60ae21953d8e6275d79dea94"
+      }
+    }
+  ]

@@ -1,0 +1,152 @@
+[
+  {
+    "acceptsCreditCard": 0,
+    "acceptsReservations": 0,
+    "delivers": 1,
+    "offersTakeout": 0,
+    "freeWifi": 1,
+    "outDoorSeating": 1,
+    "driveThrough": 0,
+    "priceRange": 1
+  },
+  {
+    "acceptsCreditCard": 1,
+    "acceptsReservations": 0,
+    "delivers": 0,
+    "offersTakeout": 1,
+    "freeWifi": 1,
+    "outDoorSeating": 1,
+    "driveThrough": 0,
+    "priceRange": 3
+  },
+  {
+    "acceptsCreditCard": 0,
+    "acceptsReservations": 1,
+    "delivers": 1,
+    "offersTakeout": 0,
+    "freeWifi": 0,
+    "outDoorSeating": 1,
+    "driveThrough": 0,
+    "priceRange": 2
+  },
+  {
+    "acceptsCreditCard": 0,
+    "acceptsReservations": 1,
+    "delivers": 0,
+    "offersTakeout": 1,
+    "freeWifi": 1,
+    "outDoorSeating": 1,
+    "driveThrough": 0,
+    "priceRange": 1
+  },
+  {
+    "acceptsCreditCard": 1,
+    "acceptsReservations": 1,
+    "delivers": 1,
+    "offersTakeout": 0,
+    "freeWifi": 0,
+    "outDoorSeating": 0,
+    "driveThrough": 0,
+    "priceRange": 2
+  },
+  {
+    "acceptsCreditCard": 1,
+    "acceptsReservations": 0,
+    "delivers": 0,
+    "offersTakeout": 1,
+    "freeWifi": 1,
+    "outDoorSeating": 1,
+    "driveThrough": 1,
+    "priceRange": 2
+  },
+  {
+    "acceptsCreditCard": 1,
+    "acceptsReservations": 0,
+    "delivers": 0,
+    "offersTakeout": 1,
+    "freeWifi": 0,
+    "outDoorSeating": 1,
+    "driveThrough": 0,
+    "priceRange": 2
+  },
+  {
+    "acceptsCreditCard": 1,
+    "acceptsReservations": 0,
+    "delivers": 1,
+    "offersTakeout": 0,
+    "freeWifi": 0,
+    "outDoorSeating": 0,
+    "driveThrough": 0,
+    "priceRange": 3
+  },
+  {
+    "acceptsCreditCard": 1,
+    "acceptsReservations": 1,
+    "delivers": 1,
+    "offersTakeout": 0,
+    "freeWifi": 0,
+    "outDoorSeating": 0,
+    "driveThrough": 1,
+    "priceRange": 4
+  },
+  {
+    "acceptsCreditCard": 0,
+    "acceptsReservations": 1,
+    "delivers": 1,
+    "offersTakeout": 1,
+    "freeWifi": 0,
+    "outDoorSeating": 0,
+    "driveThrough": 0,
+    "priceRange": 4
+  },
+  {
+    "acceptsCreditCard": 0,
+    "acceptsReservations": 0,
+    "delivers": 1,
+    "offersTakeout": 1,
+    "freeWifi": 0,
+    "outDoorSeating": 0,
+    "driveThrough": 1,
+    "priceRange": 3
+  },
+  {
+    "acceptsCreditCard": 1,
+    "acceptsReservations": 1,
+    "delivers": 1,
+    "offersTakeout": 0,
+    "freeWifi": 0,
+    "outDoorSeating": 1,
+    "driveThrough": 1,
+    "priceRange": 4
+  },
+  {
+    "acceptsCreditCard": 0,
+    "acceptsReservations": 0,
+    "delivers": 1,
+    "offersTakeout": 1,
+    "freeWifi": 0,
+    "outDoorSeating": 1,
+    "driveThrough": 0,
+    "priceRange": 3
+  },
+  {
+    "acceptsCreditCard": 0,
+    "acceptsReservations": 0,
+    "delivers": 0,
+    "offersTakeout": 1,
+    "freeWifi": 1,
+    "outDoorSeating": 0,
+    "driveThrough": 0,
+    "priceRange": 4
+  },
+  {
+    "acceptsCreditCard": 1,
+    "acceptsReservations": 0,
+    "delivers": 0,
+    "offersTakeout": 0,
+    "freeWifi": 1,
+    "outDoorSeating": 1,
+    "driveThrough": 0,
+    "priceRange": 2
+  }
+]

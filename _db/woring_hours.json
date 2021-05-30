@@ -1,0 +1,98 @@
+[
+  {
+    "daysOfWeek": "12345",
+    "openingAt": "08:00:00",
+    "closingAt": "22:00:00",
+    "pauseStart": null,
+    "pauseEnd": null,
+    "business": "60ae2a48045f7882d2816f9c"
+  },
+  {
+    "daysOfWeek": "67",
+    "openingAt": "08:00:00",
+    "closingAt": "23:00:00",
+    "pauseStart": null,
+    "pauseEnd": null,
+    "business": "60ae2a48045f7882d2816f9d"
+  },
+  {
+    "daysOfWeek": "12345",
+    "openingAt": "08:00:00",
+    "closingAt": "22:00:00",
+    "pauseStart": null,
+    "pauseEnd": null,
+    "business": "5d725cfec4ded7bcb480eaa3"
+  },
+  {
+    "daysOfWeek": "67",
+    "openingAt": "08:00:00",
+    "closingAt": "23:00:00",
+    "pauseStart": null,
+    "pauseEnd": null,
+    "business": "60ae2a48045f7882d2816f9e"
+  },
+  {
+    "daysOfWeek": "12345",
+    "openingAt": "08:00:00",
+    "closingAt": "22:00:00",
+    "pauseStart": null,
+    "pauseEnd": null,
+    "business": "60ae2a48045f7882d2816f9f"
+  },
+  {
+    "daysOfWeek": "67",
+    "openingAt": "08:00:00",
+    "closingAt": "23:00:00",
+    "pauseStart": null,
+    "pauseEnd": null,
+    "business": "60ae2a48045f7882d2816fa0"
+  },
+  {
+    "daysOfWeek": "12345",
+    "openingAt": "08:00:00",
+    "closingAt": "22:00:00",
+    "pauseStart": null,
+    "pauseEnd": null,
+    "business": "60ae2a48045f7882d2816fa1"
+  },
+  {
+    "daysOfWeek": "67",
+    "openingAt": "08:00:00",
+    "closingAt": "23:00:00",
+    "pauseStart": null,
+    "pauseEnd": null,
+    "business": "60ae2a48045f7882d2816fa2"
+  },
+  {
+    "daysOfWeek": "12345",
+    "openingAt": "08:00:00",
+    "closingAt": "22:00:00",
+    "pauseStart": null,
+    "pauseEnd": null,
+    "business": "60ae2a48045f7882d2816fa4"
+  },
+  {
+    "daysOfWeek": "67",
+    "openingAt": "08:00:00",
+    "closingAt": "23:00:00",
+    "pauseStart": null,
+    "pauseEnd": null,
+    "business": "60ae2a48045f7882d2816fa3"
+  },
+  {
+    "daysOfWeek": "12345",
+    "openingAt": "08:00:00",
+    "closingAt": "22:00:00",
+    "pauseStart": null,
+    "pauseEnd": null,
+    "business": "60ae2a48045f7882d2816fa5"
+  },
+  {
+    "daysOfWeek": "67",
+    "openingAt": "08:00:00",
+    "closingAt": "23:00:00",
+    "pauseStart": null,
+    "pauseEnd": null,
+    "business": "5d725cd2c4ded7fcb480eab2"
+  }
+]

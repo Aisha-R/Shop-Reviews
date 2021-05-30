@@ -1,0 +1,37 @@
+[
+  {
+    "title": "Skidoo",
+    "description": "Mauris enim leo, rhoncus sed, vestibulum sit amet, cursus id, turpis. Integer aliquet, massa id lobortis convallis, tortor risus dapibus augue, vel accumsan tellus nisi eu orci. Mauris lacinia sapien quis libero.\n\nNullam sit amet turpis elementum ligula v",
+    "category": "Food Truck",
+    "address": "0 Darwin Circle",
+    "city": "Vila Franca",
+    "country": "Portugal",
+    "postCode": "4935-621",
+    "phoneNumber": "888-226-0962",
+    "webSite": "http://sohu.com",
+    "email": "aleftwich0@gov.uk",
+    "reviewCount": 4,
+    "user": "60ae195954ae91663ca2f753",
+    "averageStars": 0.00,
+    "workingHours": 
+      {
+        "daysOfWeek": "12345",
+        "openingAt": "08:00:00",
+        "closingAt": "22:00:00",
+        "pauseStart": null,
+        "pauseEnd": null
+      },
+    "details": 
+      {
+        "acceptsCreditCard": 0,
+        "acceptsReservations": 0,
+        "delivers": 1,
+        "offersTakeout": 0,
+        "freeWifi": 1,
+        "outDoorSeating": 1,
+        "driveThrough": 0,
+        "priceRange": 1
+      }
+  }
+ 
+]
