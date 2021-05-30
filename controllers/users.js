@@ -107,6 +107,7 @@ exports.updateCountryInUser = async (req, res) => {
   }
 };
 
+// does not update! 
 exports.updateProfilePictureInUser = async (req, res) => {
   const { profilePicture } = req.body;
   console.log(req.user.id);

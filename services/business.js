@@ -11,6 +11,7 @@ const getAll = async listOptions => {
   return query;
 };
 
+// not done for mongodb
 const getOne = async id => {
   return Business.query()
     .withGraphFetched("[details, workingHours]")
@@ -40,6 +41,7 @@ const create = async ({ details, workingHours, ...business }) => {
   }
 };
 
+// not done for mongodb
 const update = async (id, { details, workingHours, ...business }) => {
   const trx = await Business.startTransaction();
   try {
@@ -71,6 +73,7 @@ const update = async (id, { details, workingHours, ...business }) => {
   }
 };
 
+// not done for mongodb
 const delete_ = async id => {
   const trx = await Business.startTransaction();
   try {
