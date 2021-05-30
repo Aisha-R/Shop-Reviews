@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
 const BusinessDetails = require('./BusinessDetails');
 const WorkingHoursSchema = require('./WorkingHours');
+const PhotoSchema = require('./Photo');
+const ReviewSchema = require('./Review')
 
 const BusinessSchema = new mongoose.Schema({
   title: {
@@ -48,26 +50,18 @@ const BusinessSchema = new mongoose.Schema({
     type: Number,
     required: true
   },
-  photos: [
-    {
-      type: mongoose.Schema.ObjectId,
-      ref: 'Photo',
-      required: true
-    }
-  ],
+  photos: 
+    PhotoSchema,
   workingHours: 
     WorkingHoursSchema,
-  /* reviews: [
-    {
-    }
-  ], */
-  details: 
-    BusinessDetails, 
+  reviews:
+    ReviewSchema,
   user: {
-    type: mongoose.Schema.ObjectId,
-    ref: 'User',
-    required: true
-  },
+      type: mongoose.Schema.ObjectId,
+      ref: 'User'
+    }, 
+  details: 
+    BusinessDetails,
   averageStars: {
     type: String,
     required: false

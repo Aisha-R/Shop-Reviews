@@ -60,7 +60,7 @@ const refreshTokens = JSON.parse(
 // Import into DB
 const importData = async () => {
   try {
-    await Review.create(reviews);
+    //await Review.create(reviews);
     await User.create(users);
     await Business.create(businesses);
     //await BusinessDetails.create(businessDetails);
@@ -78,7 +78,7 @@ const importData = async () => {
 // Delete data
 const deleteData = async () => {
   try {
-    await Review.deleteMany();
+    //await Review.deleteMany();
     await User.deleteMany();
     await Business.deleteMany(); 
     //await BusinessDetails.deleteMany();

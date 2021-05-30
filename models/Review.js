@@ -43,4 +43,4 @@ const ReviewSchema = new mongoose.Schema({
 
 // Static method to get average stars and save
 
-module.exports = mongoose.model('Review', ReviewSchema);
+module.exports = ReviewSchema;

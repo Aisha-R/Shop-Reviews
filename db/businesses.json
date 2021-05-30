@@ -31,7 +31,14 @@
         "outDoorSeating": 1,
         "driveThrough": 0,
         "priceRange": 1
-      }
+      },
+    "photos":
+      {
+        "photoUrl": "http://dummyimage.com/232x139.png/dddddd/000000",
+        "addedDate": "2020-05-11T00:00:00.000+00:00",
+        "review": "60ae21953d8e6275d79dea94",
+        "user": "60ae1303ae455e5ed0de1edb"
+        }
   }
  
 ]

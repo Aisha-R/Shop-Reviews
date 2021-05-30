@@ -24,12 +24,12 @@ const PhotoSchema = new mongoose.Schema({
   business: {
     type: mongoose.Schema.ObjectId,
     ref: 'Business',
-    required: true
+    //required: true
   },
   review: {
     type: mongoose.Schema.ObjectId,
     ref: 'Review',
-    required: true
+    //required: true
   }  
 });
 
