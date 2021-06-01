@@ -1,28 +1,29 @@
-const router = require('express').Router();
+const router = require("express").Router();
 
-const ReviewsController = require('../controllers/reviews.js');
+const ReviewsController = require("../controllers/reviews.js");
 
-const checkAuthMiddleware = require('../middleware/check-auth.js');
+const checkAuthMiddleware = require("../middleware/check-auth.js");
+const parseListParameters = require("../middleware/parse-list-params");
 
-router.get('/readallreviews', ReviewsController.readAllReviews);
+router.get("/reviews", parseListParameters, ReviewsController.getAll);
+router.get("/reviews/:id", ReviewsController.getOne);
 
-router.post('/readreviewsbybusiness', ReviewsController.readReviewsByBusiness);
+router.post(
+  "/reviews",
+  checkAuthMiddleware.checkAuth,
+  ReviewsController.create
+);
 
-router.post('/readreviewsbystars', ReviewsController.readReviewsByStars);
+router.delete(
+  "/reviews/:id",
+  checkAuthMiddleware.checkAuth,
+  ReviewsController.deleteReview
+);
 
-router.post('/readreviewsbyuser', ReviewsController.readReviewsByUser);
-
-router.post('/readreviewsbylanguage', ReviewsController.readReviewsByLanguage);
-
-router.post('/createreview', checkAuthMiddleware.checkAuth, ReviewsController.createReview);
-
-router.delete('/deletereview', checkAuthMiddleware.checkAuth, ReviewsController.deleteReview);
-
-router.patch('/updatetextinreview', checkAuthMiddleware.checkAuth, ReviewsController.updateTextInReview);
-
-router.patch('/updatestarsinreview', checkAuthMiddleware.checkAuth, ReviewsController.updateStarsInReview);
-
-router.patch('/updatelikeinreview', checkAuthMiddleware.checkAuth, ReviewsController.updateLikeInReview);
-
+router.put(
+  "/reviews/:id",
+  checkAuthMiddleware.checkAuth,
+  ReviewsController.update
+);
 
 module.exports = router;

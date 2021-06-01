@@ -23,14 +23,7 @@ connection.connect( (error) => {
     }
 });
 
-const businessRoute = require('./routes/business.js');
-app.use(businessRoute);
 
-const reviewsRoute = require('./routes/reviews.js');
-app.use(reviewsRoute);
-
-const usersRoute = require('./routes/users.js');
-app.use(usersRoute);
 
 // swagger docs route
 app.use('/api-docs', require('./config/swagger.js'));
@@ -41,6 +34,15 @@ const knexFile = require('./knexfile.js');
 const knexConnection = KnexLibrary(knexFile.development);
 
 Model.knex(knexConnection);
+
+const businessRoute = require('./routes/business.js');
+app.use(businessRoute);
+
+const reviewsRoute = require('./routes/reviews.js');
+app.use(reviewsRoute);
+
+const usersRoute = require('./routes/users.js');
+app.use(usersRoute);
 
 const PORT = process.env.PORT ? process.env.PORT : 3000;
 

@@ -1,28 +1,51 @@
-const router = require('express').Router();
+const router = require("express").Router();
 
-const UsersController = require('../controllers/users.js');
-const AuthController = require('../controllers/auth.js');
+const UsersController = require("../controllers/users.js");
+const AuthController = require("../controllers/auth.js");
 
-const checkAuthMiddleware = require('../middleware/check-auth.js');
+const checkAuthMiddleware = require("../middleware/check-auth.js");
+const parseListParameters = require("../middleware/parse-list-params");
 
-router.post('/login', AuthController.login);
+router.post("/login", AuthController.login);
 
-router.post('/token', AuthController.token);
+router.post("/token", AuthController.token);
 
-router.delete('/logout', AuthController.logout);
+router.delete("/logout", AuthController.logout);
 
-router.get('/readallusers', checkAuthMiddleware.checkAuth, UsersController.readAllUsers);
+router.get(
+  "/users",
+  checkAuthMiddleware.checkAuth,
+  parseListParameters,
+  UsersController.getAll
+);
 
-router.get('/readuser', checkAuthMiddleware.checkAuth, UsersController.readUser);
+router.get("/users/me", checkAuthMiddleware.checkAuth, UsersController.getSelf);
+router.get("/users/:id", checkAuthMiddleware.checkAuth, UsersController.getOne);
 
-router.post('/createuser', UsersController.createUser);
+router.post("/users", UsersController.createUser);
 
-router.delete('/deleteuser', checkAuthMiddleware.checkAuth, UsersController.deleteUser);
+router.delete(
+  "/users/:id",
+  checkAuthMiddleware.checkAuth,
+  UsersController.deleteUser
+);
 
-router.patch('/updateprofilepictureinuser', checkAuthMiddleware.checkAuth, UsersController.updateProfilePictureInUser);
+router.patch(
+  "/updateprofilepictureinuser",
+  checkAuthMiddleware.checkAuth,
+  UsersController.updateProfilePictureInUser
+);
 
-router.patch('/updatecountryinuser', checkAuthMiddleware.checkAuth, UsersController.updateCountryInUser);
+router.patch(
+  "/updatecountryinuser",
+  checkAuthMiddleware.checkAuth,
+  UsersController.updateCountryInUser
+);
 
-router.patch('/updatecityinuser', checkAuthMiddleware.checkAuth, UsersController.updateCityInUser);
+router.patch(
+  "/updatecityinuser",
+  checkAuthMiddleware.checkAuth,
+  UsersController.updateCityInUser
+);
 
 module.exports = router;
