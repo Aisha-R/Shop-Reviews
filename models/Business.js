@@ -1,7 +1,12 @@
+const BusinessDetails = require("./BusinessDetails");
+const WorkingHours = require("./WorkingHours");
 const { Model } = require('objection');
 
 class Business extends Model {
 
+    static get idColumn() {
+        return 'ID';
+    }
     static get tableName() {
         return 'business';
     }
@@ -26,6 +31,27 @@ class Business extends Model {
             userID: { type: 'integer' }
           }
         };
+    }
+    static get relationMappings() {
+        return {
+            details: {
+                relation: Model.HasOneRelation,
+                modelClass: BusinessDetails,
+                join: {
+                    from: 'business.detailsID',
+                    to:  'business_details.ID',
+                }
+            },
+            workingHours: {
+                relation: Model.HasManyRelation,
+                modelClass: WorkingHours,
+                join: {
+                    from: 'business.ID',
+                    to:  'working_hours.BusinessID',
+                }
+            }
+
+        }
     }
 
 }
