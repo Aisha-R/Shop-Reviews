@@ -1,5 +1,4 @@
 const User = require("../models/User.js");
-const RefreshToken = require("../models/RefreshTokens.js");
 
 const bcrypt = require("bcrypt");
 
@@ -21,14 +20,10 @@ exports.login = async (req, res) => {
       if (result) {
         const user = { email: email, id: userFound[0].ID };
         const accessToken = generateAccessToken(user);
-        const refreshToken = jwt.sign(user, process.env.REFRESH_TOKEN_SECRET);
+            
+        res.cookie('jwt', accessToken, { httpOnly: true, maxAge: 1000 * 60 * 60 });
 
-        await RefreshToken.query().insert({
-          refreshToken: refreshToken
-        });
-        return res
-          .status(200)
-          .json({ accessToken: accessToken, refreshToken: refreshToken });
+        return res.sendStatus(200);
       } else {
         return res.sendStatus(401);
       }
@@ -39,37 +34,11 @@ exports.login = async (req, res) => {
     }
 };
 
-exports.token = async (req, res) => {
-  const refreshToken = req.body.token;
-  if (refreshToken == null) {
-    return res.sendStatus(401);
-  }
-
-  const existingToken = await RefreshToken.query()
-    .select()
-    .where("refreshToken", refreshToken);
-
-  if (existingToken.length < 1) {
-    return res.sendStatus(403);
-  }
-
-  jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET, (error, user) => {
-    if (error) {
-      return res.sendStatus(403);
-    }
-
-    const accessToken = generateAccessToken({ email: user.email, id: user.id });
-    return res.json({ accessToken: accessToken });
-  });
-};
-
 exports.logout = async (req, res) => {
-  await RefreshToken.query()
-    .delete()
-    .where("refreshToken", req.body.token);
+  res.cookie('jwt', '', { maxAge: 1 });
   return res.sendStatus(204);
 };
 
 const generateAccessToken = (user) => {
-    return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '60m'});
+    return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '1h'});
 }

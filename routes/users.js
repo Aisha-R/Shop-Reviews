@@ -8,8 +8,6 @@ const parseListParameters = require("../middleware/parse-list-params");
 
 router.post("/login", AuthController.login);
 
-router.post("/token", AuthController.token);
-
 router.delete("/logout", AuthController.logout);
 
 router.get(

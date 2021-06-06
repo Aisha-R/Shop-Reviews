@@ -4,6 +4,9 @@ const express = require('express');
 const mysql = require('mysql');
 const app = express();
 
+const cookieParser = require('cookie-parser');
+app.use(cookieParser());
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
